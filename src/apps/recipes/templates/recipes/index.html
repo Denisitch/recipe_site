@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{{ title }} :: {{ block.super }}
+{% endblock %}
+
+{% block search_recipes %}
+<div class="container">
+    <div class="mainheading">
+        <h1 class="sitetitle">РЕЦЕПТЫ</h1>
+
+        <div class="card mb-4">
+            <div class="card-header">Поиск рецептов и ингредиентов на сайте</div>
+
+            <form method="GET">
+                <div class="container-fluid">
+                    <div class="row">
+                        <section class="search-section">
+                            <br/>
+                            <h6 class="card-title">Найти рецепт по названию: </h6>
+                            <p><input class="form-control" id='recipe_header' name='recipe'
+                                      placeholder="..."
+                                      type="text" value='{{ request.GET.recipe }}'/></p>
+                            <h6 class="card-title">Найти рецепт по ингредиентам: </h6>
+                            <p><input class="form-control" id='ingredient' name='ingredient'
+                                      placeholder="..."
+                                      type="text" value='{{ request.GET.ingredient }}'/></p>
+                            <br/>
+                            <div class="col text-center">
+                                <input class="btn btn-light btn-md btn-block"
+                                       style="background-color: #DCDCDC; color: black" type='submit'
+                                       value="Найти"></div>
+                        </section>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+{% endblock search_recipes %}
+
+{% block content %}
+<section class="featured-posts">
+    <div class="card-columns listfeaturedtag">
+
+        <!-- begin post -->
+        {% for item_r in recipes %}
+        <div class="card">
+            <div class="row">
+                <div class="col-md-5 wrapthumbnail">
+                    <a href="{{ item_r.get_absolute_url }}">
+                        <div class="thumbnail" style="background-image">
+                            {% if item_r.image %}
+                            <img src="{{ item_r.image.url }}" alt="" width="220" class="float-left mr-3">
+                            {% else %}
+                            <img src="https://i2.wp.com/gameeducation.ru/wp-content/uploads/2021/11/%D0%B3%D0%B5%D0%BD%D1%88-%D0%B5%D0%B4%D0%B0.jpg?fit=1000%2C580&ssl=1"
+                                 alt="" width="220" class="float-left mr-3">
+                            {% endif %}
+                        </div>
+                    </a>
+                </div>
+                <div class="col-md-7">
+                    <div class="card-block">
+                        <h2 class="card-title"><a href="{{ item_r.get_absolute_url }}">{{ item_r.title }}</a></h2>
+                        <h4 class="card-text">{{ item_r.instruction|linebreaks|truncatewords:20 }}</h4>
+                        <a href="{{ item_r.get_absolute_url }}" class="btn btn-secondary btn-sm">Показать</a>
+
+                        <div class="metafooter">
+                            <div class="wrapfooter">
+								<span class="meta-footer-thumb">
+								<a href="author.html"><img class="author-thumb"
+                                                           src="https://donttakefake.com/wp-content/uploads/2020/11/smile-dtf-magazine.png"
+                                                           alt="Sal"></a>
+								</span>
+
+                                <span class="author-meta">
+								<span class="post-name"><a href="author.html">{{ 'item_r.users' }}</a></span><br/>
+								<span class="post-date">{{ item_r.updated_at }}</span><span class="dot"></span>
+								</span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+        <!-- end post -->
+
+    </div>
+</section>
+{% endblock content %}

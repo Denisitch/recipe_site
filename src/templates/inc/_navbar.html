@@ -1,0 +1,40 @@
+{% load static %}
+<nav class="navbar navbar-toggleable-md navbar-light bg-white fixed-top mediumnavigation">
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+            data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false"
+            aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="container">
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+            <a class="navbar-brand" href="{% url 'home' %}">
+                <img src="{% static 'recipes/img/logo.png' %}" alt="logo">
+            </a>
+            <!-- Begin Menu -->
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item"><a class="nav-link" href="{% url 'home' %}">Главная</a></li>
+                {% if request.user.is_authenticated %}
+                <li class="nav-item"><a class="nav-link" href="#">Добавить рецепт</a></li>
+
+
+
+                {% endif %}
+            </ul>
+            <ul class="navbar-nav ml-auto" style="background-color">
+                {% if request.user.is_authenticated %}
+                <li class="nav-link">Добро пожаловать, {{ user.username }}</li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}">Выход</a></li>
+                {% else %}
+                <li class="nav-item active">
+                    <a class="nav-link" href="{% url 'register' %}">Регистрация <span
+                            class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'login' %}">Авторизация</a>
+                </li>
+                {% endif %}
+            </ul>
+            <!-- End Menu -->
+        </div>
+    </div>
+</nav>
