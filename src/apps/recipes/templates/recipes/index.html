@@ -65,7 +65,7 @@
                         <h2 class="card-title"><a href="{{ item_r.get_absolute_url }}">{{ item_r.title }}</a></h2>
                         <h4 class="card-text">{{ item_r.instruction|linebreaks|truncatewords:5 }}</h4>
                         <a href="{{ item_r.get_absolute_url }}" class="btn btn-secondary btn-sm">Смотреть рецепт</a>
-                        <h4 class="card-text">
+                        <h4 class="card-text">Ингредиенты:
                             {% for ingredient in item_r.ingredient.all %}
                             {{ ingredient.title }}
                             {% endfor %}

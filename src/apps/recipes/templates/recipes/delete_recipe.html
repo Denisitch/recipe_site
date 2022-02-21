@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{{ item_recipe.title }} :: {{ block.super }}
+{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row">
+        <h1>Удалить рецепт</h1>
+        <form action="{% url 'delete_recipe' pk=item_recipe.pk %}" method="post">
+            {% csrf_token %}
+            <p>{{ item_recipe }} будет удален!</p>
+            <button type="submit" class="btn btn-primary btn-block">Удалить</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

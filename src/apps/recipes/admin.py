@@ -9,11 +9,16 @@ class RecipeAdmin(admin.ModelAdmin):
         "id",
         "title",
         "instruction",
+        "user",
         "created_at",
         "updated_at",
         "get_image",
     )
-    list_display_links = ("id", "title")
+    list_display_links = (
+        "id",
+        "title",
+        "user",
+    )
     search_fields = ("title", "instruction")
     list_filter = ("created_at", "ingredient")
     readonly_fields = ("get_image",)

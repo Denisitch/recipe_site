@@ -10,7 +10,7 @@ from apps.users.models import User
 
 def register(request):
     if request.method == "POST":
-        form = UserRegisterForm(request.POST)
+        form = UserRegisterForm(request.POST, request.FILES)
         if form.is_valid():
             user = form.save()
             login(request, user)
@@ -47,3 +47,7 @@ class UserView(DetailView):
     model = User
     template_name = "users/user.html"
     context_object_name = "item_user"
+
+
+def not_author(request):
+    return render(request, "users/not_author.html")
