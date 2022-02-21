@@ -1,7 +1,11 @@
 from django.shortcuts import render, redirect
+from django.views.generic import DetailView
+
 from apps.users.forms import UserRegisterForm, UserLoginForm
 from django.contrib.auth import login, logout
 from django.contrib import messages
+
+from apps.users.models import User
 
 
 def register(request):
@@ -37,3 +41,9 @@ def user_login(request):
 def user_logout(request):
     logout(request)
     return redirect("login")
+
+
+class UserView(DetailView):
+    model = User
+    template_name = "users/user.html"
+    context_object_name = "item_user"

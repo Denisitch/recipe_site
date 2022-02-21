@@ -19,11 +19,11 @@
                             <br/>
                             <h6 class="card-title">Найти рецепт по названию: </h6>
                             <p><input class="form-control" id='recipe_header' name='recipe'
-                                      placeholder="..."
+                                      placeholder="ввод рецепта"
                                       type="text" value='{{ request.GET.recipe }}'/></p>
                             <h6 class="card-title">Найти рецепт по ингредиентам: </h6>
                             <p><input class="form-control" id='ingredient' name='ingredient'
-                                      placeholder="..."
+                                      placeholder="ввод ингредиента"
                                       type="text" value='{{ request.GET.ingredient }}'/></p>
                             <br/>
                             <div class="col text-center">
@@ -63,19 +63,30 @@
                 <div class="col-md-7">
                     <div class="card-block">
                         <h2 class="card-title"><a href="{{ item_r.get_absolute_url }}">{{ item_r.title }}</a></h2>
-                        <h4 class="card-text">{{ item_r.instruction|linebreaks|truncatewords:20 }}</h4>
-                        <a href="{{ item_r.get_absolute_url }}" class="btn btn-secondary btn-sm">Показать</a>
-
+                        <h4 class="card-text">{{ item_r.instruction|linebreaks|truncatewords:5 }}</h4>
+                        <a href="{{ item_r.get_absolute_url }}" class="btn btn-secondary btn-sm">Смотреть рецепт</a>
+                        <h4 class="card-text">
+                            {% for ingredient in item_r.ingredient.all %}
+                            {{ ingredient.title }}
+                            {% endfor %}
+                        </h4>
                         <div class="metafooter">
                             <div class="wrapfooter">
 								<span class="meta-footer-thumb">
-								<a href="author.html"><img class="author-thumb"
-                                                           src="https://donttakefake.com/wp-content/uploads/2020/11/smile-dtf-magazine.png"
+								<a href="{{ item_r.user.get_absolute_url }}">
+                                    {% if item_r.user.photo %}
+                                    <img class="author-thumb"
+                                         src="{{ item_r.user.photo.url }}"
                                                            alt="Sal"></a>
+                                    {% else %}
+                                    <img class="author-thumb"
+                                         src="https://donttakefake.com/wp-content/uploads/2020/11/smile-dtf-magazine.png"
+                                                           alt="Sal"></a>
+                                    {% endif %}
 								</span>
 
                                 <span class="author-meta">
-								<span class="post-name"><a href="author.html">{{ 'item_r.users' }}</a></span><br/>
+								<span class="post-name"><a href="{{ item_r.user.get_absolute_url }}">{{ item_r.user }}</a></span><br/>
 								<span class="post-date">{{ item_r.updated_at }}</span><span class="dot"></span>
 								</span>
                             </div>

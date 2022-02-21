@@ -16,7 +16,13 @@ class UserRegisterForm(UserCreationForm):
 
     class Meta:
         model = User
-        fields = ("username", "email", "password1", "password2",)
+        fields = (
+            "username",
+            "email",
+            "password1",
+            "password2",
+            "photo",
+        )
         widgets = {
             "username": forms.TextInput(attrs={"class": "form-control"}),
             "email": forms.EmailInput(attrs={"class": "form-control"}),
@@ -24,9 +30,9 @@ class UserRegisterForm(UserCreationForm):
 
         def clean_password2(self):
             cd = self.cleaned_data
-            if cd['password'] != cd['password2']:
-                raise forms.ValidationError('Пароли не совпадают')
-            return cd['password2']
+            if cd["password"] != cd["password2"]:
+                raise forms.ValidationError("Пароли не совпадают")
+            return cd["password2"]
 
 
 class UserLoginForm(AuthenticationForm):

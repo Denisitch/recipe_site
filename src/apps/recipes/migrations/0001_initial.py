@@ -7,37 +7,85 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='Ingredient',
+            name="Ingredient",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('title', models.CharField(max_length=100, unique=True, verbose_name='Ингредиент')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "title",
+                    models.CharField(
+                        max_length=100, unique=True, verbose_name="Ингредиент"
+                    ),
+                ),
             ],
             options={
-                'verbose_name': 'Ингредиент',
-                'verbose_name_plural': 'Ингредиенты',
-                'ordering': ['title'],
+                "verbose_name": "Ингредиент",
+                "verbose_name_plural": "Ингредиенты",
+                "ordering": ["title"],
             },
         ),
         migrations.CreateModel(
-            name='Recipe',
+            name="Recipe",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('created_at', models.DateTimeField(auto_now_add=True, verbose_name='Дата публикации')),
-                ('updated_at', models.DateTimeField(auto_now=True, verbose_name='Дата обновления')),
-                ('title', models.CharField(max_length=150, verbose_name='Название рецепта')),
-                ('instruction', models.TextField(verbose_name='Инструкция приготовления')),
-                ('image', models.ImageField(blank=True, upload_to='images/recipes', verbose_name='Изображение')),
-                ('ingredient', models.ManyToManyField(related_name='ingredient', to='recipes.Ingredient', verbose_name='Ингредиент')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "created_at",
+                    models.DateTimeField(
+                        auto_now_add=True, verbose_name="Дата публикации"
+                    ),
+                ),
+                (
+                    "updated_at",
+                    models.DateTimeField(auto_now=True, verbose_name="Дата обновления"),
+                ),
+                (
+                    "title",
+                    models.CharField(max_length=150, verbose_name="Название рецепта"),
+                ),
+                (
+                    "instruction",
+                    models.TextField(verbose_name="Инструкция приготовления"),
+                ),
+                (
+                    "image",
+                    models.ImageField(
+                        blank=True,
+                        upload_to="images/recipes",
+                        verbose_name="Изображение",
+                    ),
+                ),
+                (
+                    "ingredient",
+                    models.ManyToManyField(
+                        related_name="ingredient",
+                        to="recipes.Ingredient",
+                        verbose_name="Ингредиент",
+                    ),
+                ),
             ],
             options={
-                'verbose_name': 'Рецепт',
-                'verbose_name_plural': 'Рецепты',
-                'ordering': ['-created_at'],
+                "verbose_name": "Рецепт",
+                "verbose_name_plural": "Рецепты",
+                "ordering": ["-created_at"],
             },
         ),
     ]
