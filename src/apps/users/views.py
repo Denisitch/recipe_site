@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.views.generic import DetailView
 
+from apps.recipes.models import Recipe
 from apps.users.forms import UserRegisterForm, UserLoginForm
 from django.contrib.auth import login, logout
 from django.contrib import messages
@@ -47,6 +48,15 @@ class UserView(DetailView):
     model = User
     template_name = "users/user.html"
     context_object_name = "item_user"
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super(UserView, self).get_context_data(**kwargs)
+        context["title"] = "Пользователь"
+        context["recipe_list"] = Recipe.objects.all().order_by("title")
+        return context
+
+    def get_queryset(self):
+        return User.objects.filter(pk=self.kwargs["pk"])
 
 
 def not_author(request):
