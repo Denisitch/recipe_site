@@ -24,6 +24,7 @@ class Recipe(TimeStampMixin):
         User,
         on_delete=models.SET_NULL,
         verbose_name="Автор рецепта",
+        related_name="authors",
         blank=True,
         null=True,
     )

@@ -55,8 +55,9 @@ class UserView(DetailView):
         context["recipe_list"] = Recipe.objects.all().order_by("title")
         return context
 
-    def get_queryset(self):
-        return User.objects.filter(pk=self.kwargs["pk"])
+    # def get_queryset(self):
+    #     user = User.objects.get(pk=2)
+    #     return user.authors.all()
 
 
 def not_author(request):
