@@ -38,13 +38,13 @@
 
 <!-- Begin Author Posts
 ================================================== -->
-{% for item_r in recipe_list %}
+{% for recipe in recipe_list %}
 <div class="listrecent listrelated">
     <!-- begin post -->
     <div class="authorpostbox">
         <a href="{{ item_r.get_absolute_url }}"></a>
-        <h2 class="card-title"><a href="{{ item_r.get_absolute_url }}">{{ item_r.title }}</a></h2>
-        <span class="post-date">{{ item_r.created_at }}</span>
+        <h2 class="card-title"><a href="{{ item_r.get_absolute_url }}">{{ recipe.title }}</a></h2>
+        <span class="post-date">{{ recipe.created_at }}</span>
         <!-- end post -->
     </div>
 </div>

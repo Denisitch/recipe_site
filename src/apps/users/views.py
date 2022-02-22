@@ -52,12 +52,10 @@ class UserView(DetailView):
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super(UserView, self).get_context_data(**kwargs)
         context["title"] = "Пользователь"
-        context["recipe_list"] = Recipe.objects.all().order_by("title")
-        return context
 
-    # def get_queryset(self):
-    #     user = User.objects.get(pk=2)
-    #     return user.authors.all()
+        user = User.objects.get(pk=self.kwargs["pk"])
+        context["recipe_list"] = user.authors.all()
+        return context
 
 
 def not_author(request):
