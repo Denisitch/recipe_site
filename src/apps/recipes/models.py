@@ -4,6 +4,10 @@ from apps.users.models import User
 
 
 class TimeStampMixin(models.Model):
+    """
+    Recipe creation and update time mixin
+    """
+
     created_at = models.DateTimeField("Дата публикации", auto_now_add=True)
     updated_at = models.DateTimeField("Дата обновления", auto_now=True)
 
@@ -12,6 +16,10 @@ class TimeStampMixin(models.Model):
 
 
 class Recipe(TimeStampMixin):
+    """
+    Recipe model
+    """
+
     title = models.CharField("Название рецепта", max_length=150)
     instruction = models.TextField("Инструкция приготовления")
     ingredient = models.ManyToManyField(
@@ -42,6 +50,10 @@ class Recipe(TimeStampMixin):
 
 
 class Ingredient(models.Model):
+    """
+    Ingredient model
+    """
+
     title = models.CharField("Ингредиент", unique=True, max_length=100)
 
     def __str__(self):

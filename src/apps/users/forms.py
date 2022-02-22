@@ -4,6 +4,10 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 
 
 class UserRegisterForm(UserCreationForm):
+    """
+    User registration form
+    """
+
     password1 = forms.CharField(
         label="Пароль",
         help_text="Пароль должен содержать не менее 8 символов и состоять из букв, цифр и/или спец. знаков",
@@ -36,6 +40,10 @@ class UserRegisterForm(UserCreationForm):
 
 
 class UserLoginForm(AuthenticationForm):
+    """
+    User authorization form
+    """
+
     username = forms.CharField(
         label="Имя пользователя",
         widget=forms.TextInput(attrs={"class": "form-control"}),

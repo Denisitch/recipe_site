@@ -4,6 +4,10 @@ from django.urls import reverse
 
 
 class User(AbstractUser):
+    """
+    User model. Override base class AbstractUser
+    """
+
     photo = models.ImageField(upload_to="images/users", blank=True, verbose_name="Фото")
 
     def get_absolute_url(self):

@@ -5,6 +5,10 @@ from apps.recipes.models import Recipe, Ingredient
 
 @admin.register(Recipe)
 class RecipeAdmin(admin.ModelAdmin):
+    """
+    Recipe Model Administration
+    """
+
     list_display = (
         "id",
         "title",
@@ -31,6 +35,10 @@ class RecipeAdmin(admin.ModelAdmin):
 
 @admin.register(Ingredient)
 class IngredientAdmin(admin.ModelAdmin):
+    """
+    Ingredient Model Administration
+    """
+
     list_display = ("id", "title")
     list_display_links = ("id", "title")
     search_fields = ("title",)

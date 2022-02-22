@@ -3,6 +3,10 @@ from apps.recipes.models import Recipe
 
 
 class RecipesForm(forms.ModelForm):
+    """
+    Form for creating recipes
+    """
+
     new_ingredients = forms.CharField(
         label="Добавьте ингредиенты так, чтобы каждый новый ингредиент отделялся знаком + от последующего",
         widget=forms.TextInput(

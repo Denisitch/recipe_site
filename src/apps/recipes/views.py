@@ -16,6 +16,10 @@ from apps.recipes.utils import UserRuleMixin
 
 
 class RecipesView(ListView):
+    """
+    List of recipes with search and filtering by ingredients
+    """
+
     model = Recipe
     template_name = "recipes/index.html"
     context_object_name = "recipes"
@@ -42,6 +46,10 @@ class RecipesView(ListView):
 
 
 class RecipeDetail(DetailView):
+    """
+    Recipe Detail View
+    """
+
     model = Recipe
     template_name = "recipes/detail.html"
     context_object_name = "item_recipe"
@@ -53,6 +61,10 @@ class RecipeDetail(DetailView):
 
 
 class CreateRecipe(LoginRequiredMixin, CreateView):
+    """
+    Recipe Create View
+    """
+
     model = Recipe
     template_name = "add_recipe.html"
     form_class = RecipesForm
@@ -80,6 +92,10 @@ class CreateRecipe(LoginRequiredMixin, CreateView):
 
 
 class UpdateRecipe(UserRuleMixin, UpdateView):
+    """
+    Recipe Update View
+    """
+
     model = Recipe
     template_name = "recipes/edit_recipe.html"
     fields = ["title", "instruction", "ingredient"]
@@ -87,6 +103,10 @@ class UpdateRecipe(UserRuleMixin, UpdateView):
 
 
 class DeleteRecipe(UserRuleMixin, DeleteView):
+    """
+    Recipe Delete View
+    """
+
     model = Recipe
     template_name = "recipes/delete_recipe.html"
     context_object_name = "item_recipe"
