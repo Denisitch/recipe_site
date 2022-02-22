@@ -68,27 +68,7 @@ class CreateRecipe(LoginRequiredMixin, CreateView):
     model = Recipe
     template_name = "add_recipe.html"
     form_class = RecipesForm
-
-    def post(self, request, *args, **kwargs):
-        recipe_form = RecipesForm(request.POST, request.FILES)
-        if recipe_form.is_valid():
-            ingredient = Ingredient.objects.create(
-                title=recipe_form.cleaned_data["ingredient"]
-            )
-            title = recipe_form.cleaned_data.get("title")
-            instruction = recipe_form.cleaned_data.get("instruction")
-            image = self.get_image(recipe_form)
-            instance = Recipe.objects.create(
-                title=title, instruction=instruction, image=image
-            )
-            instance.ingredient.set([ingredient])
-            messages.success(request, "Рецепт добавлен успешно")
-            return redirect("home")
-        return render(request, "add_recipe.html", context={"form": recipe_form})
-
-    def get_image(self, form):
-        image = form.cleaned_data.get("image")
-        return image
+    success_url = reverse_lazy("home")
 
 
 class UpdateRecipe(UserRuleMixin, UpdateView):

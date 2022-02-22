@@ -1,5 +1,5 @@
 from django import forms
-from apps.recipes.models import Recipe
+from apps.recipes.models import Recipe, Ingredient
 
 
 class RecipesForm(forms.ModelForm):
@@ -13,12 +13,17 @@ class RecipesForm(forms.ModelForm):
             attrs={"class": "form-control", "placeholder": "Соль+Сахар+Перец и тд..."}
         ),
     )
+    ingredient = forms.ModelMultipleChoiceField(
+        queryset=Ingredient.objects.all(),
+        widget=forms.CheckboxSelectMultiple,
+    )
 
     class Meta:
         model = Recipe
         fields = (
             "title",
             "instruction",
+            "ingredient",
             "new_ingredients",
             "image",
         )
